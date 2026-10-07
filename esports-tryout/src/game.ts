@@ -93,6 +93,7 @@ export class Game {
         </header>
         <main id="view"></main>
       </div>
+      <div class="reticle" id="reticle" hidden></div>
     `;
 
     const canvas = root.querySelector<HTMLCanvasElement>("#fx");
@@ -112,7 +113,13 @@ export class Game {
     this.meterEl = meterEl;
     this.pips = [...root.querySelectorAll<HTMLElement>(".pips li")];
 
+    const reticle = root.querySelector<HTMLElement>("#reticle");
+    if (!reticle) throw new Error("准星初始化失败");
     window.addEventListener("resize", () => this.fx.resize());
+    window.addEventListener("pointermove", (event) => {
+      reticle.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+      reticle.hidden = !this.view.querySelector(".arena");
+    });
     window.addEventListener("keydown", (event) => {
       if (event.code === "Space" && event.target === document.body) event.preventDefault();
     });
