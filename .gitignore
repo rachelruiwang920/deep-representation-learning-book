@@ -94,6 +94,10 @@ website/html/zh/search-index.json
 .venv/
 uv.lock
 
+# Esports tryout app
+esports-tryout/node_modules/
+esports-tryout/dist/
+
 # VsCode 
 .vscode
 
